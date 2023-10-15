@@ -363,6 +363,17 @@ def set_player_audiostream(set_player_audiostream, reload_property='UID', **kwar
     xbmc.executebuiltin(f'SetProperty({reload_property},{time.time()})')
 
 
+def set_player_videostream(set_player_videostream, reload_property='UID', **kwargs):
+    import time
+    import xbmc
+    from jurialmunkey.jsnrpc import get_jsonrpc
+    from jurialmunkey.parser import try_int
+    method = "Player.SetVideoStream"
+    params = {"playerid": 1, "stream": try_int(set_player_videostream)}
+    get_jsonrpc(method, params)
+    xbmc.executebuiltin(f'SetProperty({reload_property},{time.time()})')
+
+
 def set_editcontrol(set_editcontrol, text=None, window_id=None, setfocus=None, setfocus_wait='00:00', **kwargs):
     import xbmc
     from jurialmunkey.jsnrpc import get_jsonrpc
